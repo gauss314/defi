@@ -26,7 +26,7 @@ pip install juanpy
       En función de las pendientes de los últimos pares de mínimos y máximos encontrados 
 
 
-```sh
+```python
 import juanpy
 
 juanpy.trends(ticker='TWTR')
@@ -40,10 +40,10 @@ juanpy.trends(ticker='TWTR')
 ### Ejemplo con cambio de escala y cambio de sensibilidad, y parámetros:
 <br>La sensibilidad la tomará en cantidad de velas para encontrar nuevos máximos y/o mínimos locales
 
-```sh
+```python
 import juanpy
 
-df = juanpy.trends('TWTR, start='2014-06-01', end='2020-01-01', sensibilidad=60, escala='log')
+df = juanpy.trends('TWTR', start='2014-06-01', end='2020-01-01', sensibilidad=60, escala='log')
 ```
 
 <div align="center">
@@ -65,7 +65,7 @@ df = juanpy.trends('TWTR, start='2014-06-01', end='2020-01-01', sensibilidad=60,
 Interpola máximos y mínimos de una manera mas suavizada basado en el script de las tendencias
 
 
-```sh
+```python
 import juanpy
 
 juanpy.waves('TWTR', sensibilidad=60, escala='log')
