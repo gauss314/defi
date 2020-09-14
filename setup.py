@@ -11,4 +11,4 @@ setup(name="juanpy",
 	keywords="Ullua, El taco no, manteca" ,
 	classifiers=["Programming Language :: Python :: 3","License :: OSI Approved :: MIT License","Operating System :: OS Independent"],
 	python_requires=">=3.6",
-	install_requires=["pandas","matplotlib, yfinance, datetime"])
+	install_requires=["pandas","matplotlib", "yfinance", "datetime"])
