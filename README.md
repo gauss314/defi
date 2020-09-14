@@ -32,9 +32,10 @@ juanpy.trends(ticker='TWTR')
 ```
 
 <div align="center">
-  <img border="0"  src="images/example1.png" width="600">
+  <img border="0"  src="images/example1.png" width="800">
 </div>
 
+<br><br>
 
 ### Ejemplo con cambio de escala y cambio de sensibilidad, y parámetros:
 <br>La sensibilidad la tomará en cantidad de velas para encontrar nuevos máximos y/o mínimos locales
@@ -46,7 +47,7 @@ df = juanpy.trends('TWTR', start='2014-06-01', end='2020-01-01', sensibilidad=60
 ```
 
 <div align="center">
-  <img border="0"  src="images/example2.png" width="600">
+  <img border="0"  src="images/example2.png" width="800">
 </div>
 
 
@@ -56,7 +57,7 @@ df = juanpy.trends('TWTR', start='2014-06-01', end='2020-01-01', sensibilidad=60
 * La tendencia a partir de las pendientes de los últimos máximos y mínimos en cada punto (-1 para bajista, 0 para lateral y 1 para alcista)
 
 <div align="center">
-  <img border="0"  src="images/example3.png" width="600">
+  <img border="0"  src="images/example3.png" width="700">
 </div>
 
 ## Ejemplo para graficar ondas
@@ -70,7 +71,7 @@ import juanpy
 juanpy.waves('TWTR', sensibilidad=60, escala='log')
 ```
 <div align="center">
-  <img border="0"  src="images/example4.png" width="600">
+  <img border="0"  src="images/example4.png" width="700">
 </div>
 
 ## Créditos
