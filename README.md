@@ -54,7 +54,7 @@ df = juanpy.trends('TWTR', start='2014-06-01', end='2020-01-01', sensibilidad=60
 <br>Devuelve un dataframe con 
 * los valores de máximos y mínimos vigentes a cada fecha (vMin y vMax) 
 * las pendientes resultantes de unir los dos úlitmos mínimos y los dos últimos máximmos (pMin y pMax) apto apra canales
-* La tendencia a partir de las pendientes de los últimos máximos y mínimos en cada punto (-1 para bajista, 0 para lateral y 1 para alcista)<
+* La tendencia a partir de las pendientes de los últimos máximos y mínimos en cada punto (-1 para bajista, 0 para lateral y 1 para alcista)
 
 <div align="center">
   <img border="0"  src="images/example3.png" width="600">
