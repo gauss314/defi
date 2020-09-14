@@ -3,8 +3,6 @@
 
 Esta librería tiene como finalidad empezar a generar contenido de los scripts que vayan armando los alumnos del curso de python para traders de @Ullua  https://twitter.com/Ullua
 
-<br>Link curso: https://ecommerce.rubenjullua.com.ar/Ecommerce/Pages/Evento/Evento.aspx?E=btTvQY%2f5RHrD9N79caWuAw%3d%3d
-
 <br><br>
 ## Instalación
 
