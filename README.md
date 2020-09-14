@@ -32,7 +32,7 @@ juanpy.trends(ticker='TWTR')
 ```
 
 <div align="center">
-  <img border="0"  src="images/example1.png" width="800">
+  <img border="0"  src="images/example1.png" width="700">
 </div>
 
 <br><br>
@@ -47,7 +47,7 @@ df = juanpy.trends('TWTR', start='2014-06-01', end='2020-01-01', sensibilidad=60
 ```
 
 <div align="center">
-  <img border="0"  src="images/example2.png" width="800">
+  <img border="0"  src="images/example2.png" width="700">
 </div>
 
 
