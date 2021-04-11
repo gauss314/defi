@@ -7,7 +7,7 @@ from pandas.plotting import register_matplotlib_converters
 register_matplotlib_converters()
 
 
-def iloss(price_ratio):
+def iloss(price_ratio, numerical=False):
     """return the impermanent loss result in compare with buy&hold A&B assets
 
     
@@ -19,9 +19,10 @@ def iloss(price_ratio):
                     var_A: Asset A % variation
                     var_B: Asset B % variation
 
+        numerical (bool): if True, returns impermanent loss as a decimal expr, ie "5%"" => 0.05 (Default: False) 
     
     Returns:
-        TYPE: impermanent loss decimal value, ie iloss:10%, returns 0.1
+        TYPE: impermanent loss as a string percentual value
     """
     il = 2 * (price_ratio**0.5 / (1 + price_ratio)) - 1
     return f"{il:.2%}"
