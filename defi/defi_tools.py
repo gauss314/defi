@@ -24,7 +24,7 @@ def iloss(price_ratio):
         TYPE: impermanent loss decimal value, ie iloss:10%, returns 0.1
     """
     il = 2 * (price_ratio**0.5 / (1 + price_ratio)) - 1
-    return f"{il.:2%}"
+    return f"{il:.2%}"
 
 
 
