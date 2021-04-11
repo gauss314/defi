@@ -8,6 +8,21 @@ register_matplotlib_converters()
 
 
 def iloss(price_ratio):
+    """return the impermanent loss result in compare with buy&hold A&B assets
+
+    
+    Args:
+        price_ratio (float): Variation A Asset / Variation B Asset
+            
+            price_ratio formula:
+                price_ratio = (var_A/100 + 1) / (var_B/100 + 1)
+                    var_A: Asset A % variation
+                    var_B: Asset B % variation
+
+    
+    Returns:
+        TYPE: impermanent loss decimal value, ie iloss:10%, returns 0.1
+    """
     return 2 * (price_ratio**0.5 / (1 + price_ratio)) - 1
 
 

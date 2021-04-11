@@ -1,0 +1,6 @@
+[distutils]
+	index-server = pypi
+
+[pypi]
+repository = https://pypi.python.org/pypi
+username = juanpy
