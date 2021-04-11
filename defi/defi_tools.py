@@ -25,8 +25,9 @@ def iloss(price_ratio, numerical=False):
         TYPE: impermanent loss as a string percentual value
     """
     il = 2 * (price_ratio**0.5 / (1 + price_ratio)) - 1
-    return f"{il:.2%}"
+    r = f"{il:.2%}" if not numerical else il
 
+    return r
 
 
 
