@@ -59,3 +59,62 @@ def compare(days, var_A=0, var_B=0, rw_pool_A=0, rw_pool_B=0, rw_pool_AB=0, fees
     mejor = 'Farm' if farm > stake else 'Stake'
     
     return {'buy_hold':f'{buy_hold:.2%}', 'stake':f'{stake:.2%}', 'farm':f'{farm:.2%}', 'Best': mejor}
+
+
+"""
+Llama API
+
+    Public API https://docs.llama.fi/api
+
+"""
+
+def getProtocols():
+    """Get list all DeFi protocols across all blockchains
+    
+    Returns:
+        DataFrame: All DeFi dApps 
+    """
+    url = "https://api.llama.fi/protocols"
+    r = requests.get(url)
+    r_json = r.json()
+    df = pd.DataFrame(r_json)
+    df.set_index('name', inplace=True)
+    return df
+
+
+def getProtocol(protocol):
+    """Get metrics and historic TVL for one DeFi dApp
+    
+    Args:
+        protocol (String): Name of protocol ie "Uniswap"
+    
+    Returns:
+        tuple (Dictionary, DataFrame): Dictionary with protocol metadata & DataFrame with historical TVL
+    """
+    url = f"https://api.llama.fi/protocol/{protocol}"
+    r = requests.get(url)
+    r_json = r.json()
+
+    df = pd.DataFrame(r_json['tvl'])
+    df.date = pd.to_datetime(df.date, unit='s')
+    df = df.set_index('date')
+    del r_json['tvl']
+    metadata = r_json
+
+    return metadata, df
+
+
+def getChart():
+    """Get historical TVL across all DeFi dApps, cummulative result
+    
+    Returns:
+        DataFrame: DataFrame date-indexed with all days TVL 
+    """
+
+    url  = "https://api.llama.fi/charts"
+    r = requests.get(url)
+    r_json = r.json()
+    df = pd.DataFrame(r_json)
+    df.date = pd.to_datetime(df.date, unit='s')
+    df = df.set_index('date')
+    return df
