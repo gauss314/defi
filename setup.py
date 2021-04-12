@@ -11,4 +11,4 @@ setup(name="defi",
 	keywords="defi, impermanent loss, finance, cryptos, bitcoin, liquidity pool, farming, bsc, eth, terra, heco, blockchain " ,
 	classifiers=["Programming Language :: Python :: 3","License :: OSI Approved :: MIT License","Operating System :: OS Independent"],
 	python_requires=">=3.6",
-	install_requires=["pandas","matplotlib", "datetime"])
+	install_requires=["pandas","matplotlib", "datetime","requests"])

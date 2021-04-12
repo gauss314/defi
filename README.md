@@ -24,10 +24,10 @@ dft.iloss(0.8)
 import defi.defi_tools as dft
 
 # Impermanent loss for stableCoin & +60% return token 
-dft.iloss(1.6)
+dft.iloss(1.6, numerical=True)
 
 ```
-> -2.7%
+> 0.027   # Same as 2.7%
 
 
 
