@@ -73,9 +73,9 @@ metadata
  "url": "https://info.uniswap.org/",
  "description": "A fully decentralized protocol for automated liquidity provision on Ethereum.\r\n",
  "chain": "Ethereum",
- "logo": None,
+ "logo": "None",
  "audits": "2",
- "audit_note": None,
+ "audit_note": "None",
  "gecko_id": "uniswap",
  "cmcId": "7083",
  "category": "Dexes",
@@ -106,7 +106,7 @@ plt.legend()
 plt.xticks(rotation=90)
 plt.show()
 ```
-<img src="images/top20_dapps.png" with=400>
+<img src="images/top20_dapps.png" style="with:400px">
 
 
 
@@ -121,7 +121,7 @@ df = pd.concat(hist, axis=1)
 df.columns = exchanges
 df.plot(figsize=(12,6))
 ```
-<img src="images/main_dapps.png" with=400>
+<img src="images/main_dapps.png" style="with:400px">
 
 
 
