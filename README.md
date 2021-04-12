@@ -16,7 +16,7 @@ import defi.defi_tools as dft
 # Impermanent loss for stableCoin & -20% return token 
 dft.iloss(0.8)
 ```
->>> -0.62%
+> -0.62%
 
 
 
@@ -27,7 +27,7 @@ import defi.defi_tools as dft
 dft.iloss(1.6)
 
 ```
->>> -2.7%
+> -2.7%
 
 
 
@@ -103,7 +103,7 @@ plt.legend()
 plt.xticks(rotation=90)
 plt.show()
 ```
-<img src="images/top20_dapps.png" width=400>
+<img src="images/top20_dapps.png" width=600>
 
 
 
@@ -118,7 +118,7 @@ df = pd.concat(hist, axis=1)
 df.columns = exchanges
 df.plot(figsize=(12,6))
 ```
-<img src="images/main_dapps.png" width=400>
+<img src="images/main_dapps.png" width=600>
 
 
 
