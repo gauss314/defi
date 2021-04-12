@@ -1,6 +1,6 @@
 # Tools for use in DeFi
 
-## Instalación
+## Instalation
 
 
 ```sh
@@ -37,6 +37,9 @@ dft.iloss(1.6, numerical=True)
 ```python
 import defi.defi_tools as dft
 
+# Exercise: Get returns after 20 days, assuming token A is a stablecoin, token B perform + 150%
+# individual staking pools for both = 0.01% & 0.05% daily
+# liquidity-pool farming rewards =0.2% daily & Earn by fees/day = 0.01%
 dft.compare(days=20, var_A=0, var_B=150, rw_pool_A=0.01, rw_pool_B=0.05, rw_pool_AB=0.2, fees_AB=0.01)
 ```
 
@@ -45,7 +48,7 @@ dft.compare(days=20, var_A=0, var_B=150, rw_pool_A=0.01, rw_pool_B=0.05, rw_pool
  "buy_hold": "75.00%",
  "stake": "75.60%",
  "farm": "71.96%",
- "Mejor Estrategia": "Stake"
+ "Best": "Stake"
 }
 ```
 
@@ -119,6 +122,26 @@ df.columns = exchanges
 df.plot(figsize=(12,6))
 ```
 <img src="images/main_dapps.png" width=600>
+
+
+
+## CoinGecko API
+
+Endpoints available, some examples:
+	* geckoPrice("bitcoin,ethereum", "usd,eur,brl")
+		# coinGecko quotes
+
+	* geckoList(page=1, per_page=250)
+		# full coinGecko cyptocurrency list
+
+	* geckoMarkets("ethereum")
+		# top 100 liquidity markets, prices, and more, for eth or other coin
+
+	* geckoHistorical('cardano')
+		# full history containing price, market cap and volume 
+
+
+full API wraper soon
 
 
 

@@ -118,3 +118,101 @@ def getChart():
     df.date = pd.to_datetime(df.date, unit='s')
     df = df.set_index('date')
     return df
+
+
+
+"""
+coinGecko API
+
+    Public API https://www.coingecko.com/es/api#explore-api
+
+"""
+
+
+def geckoPrice(tokens, quote):
+    """get price of combine pairs
+    
+    Args:
+        tokens (comma separated strings): ie "bitcoin,ethereum"
+        quote (comma separated fiat or quote currency): ie: "usd,eur"
+    
+    Returns:
+        dictionary: Returns pairs quotes
+    """
+
+    url = "https://api.coingecko.com/api/v3/simple/price"
+    params = {"ids":tokens, "vs_currencies":quote}
+    r = requests.get(url, params).json()
+    return r
+
+
+
+def geckoList(page=1, per_page=250):
+    """Returns list of full detail conGecko currency list
+    
+    Args:
+        page (int, optional): number of pages
+        per_page (int, optional): number of records per page
+    
+    Returns:
+        DataFrame: list of full detail conGecko currency list
+    """
+    url = "https://api.coingecko.com/api/v3/coins/markets"
+    params = {"vs_currency":"usd", "order":"market_cap_desc", "per_page":per_page, "page":page}
+    r = requests.get(url, params).json()
+    df = pd.DataFrame(r)
+    df.set_index('symbol', inplace=True)
+    return df
+
+
+
+def geckoMarkets(ticker):
+    """Get top100 markets (pairs, quotes, exchanges, volume, spreads and more)
+    
+    Args:
+        ticker (string): gecko ID, ie "bitcoin"
+    
+    Returns:
+        DataFrame: Full detail markets available
+    """
+    url = f"https://api.coingecko.com/api/v3/coins/{ticker}/tickers"
+    r = requests.get(url).json()['tickers']
+    df = pd.DataFrame(r)
+    df['exchange'] = df['market'].apply(pd.Series)['name']
+    df['volume_usd'] = df['converted_volume'].apply(pd.Series)['usd']
+    df['price_usd'] = df['converted_last'].apply(pd.Series)['usd']
+
+    df.set_index('exchange', inplace=True)
+    cols = ['base','target','last', 'volume','bid_ask_spread_percentage','timestamp',
+                   'volume_usd','price_usd','trust_score']
+    df = df.loc[:,cols]
+    cols[4] = 'spread'
+    df.columns = cols
+    df.timestamp = pd.to_datetime(df.timestamp)
+    
+    return df.sort_values('volume_usd', ascending=False)
+
+
+
+def geckoHistorical(ticker, vs_currency='usd'):
+    """Historical prices from coinGecko
+    
+    Args:
+        ticker (string): gecko ID, ie "bitcoin"
+        vs_currency (str, optional): ie "usd" (default)
+    
+    Returns:
+        DataFrame: Full history: date, price, market cap & volume
+    """
+    url = f"https://api.coingecko.com/api/v3/coins/{ticker}/market_chart"
+    params = {"vs_currency":{vs_currency}, "days":"max"}
+    r = requests.get(url, params).json()
+    prices = pd.DataFrame(r['prices'])
+    market_caps = pd.DataFrame(r['market_caps'])
+    total_volumes = pd.DataFrame(r['total_volumes'])
+    df = pd.concat([prices, market_caps[1], total_volumes[1]], axis=1)
+    df[0] = pd.to_datetime(df[0], unit='ms')
+    df.columns = ['date','price','market_caps','total_volumes']
+    df.set_index('date', inplace=True)
+
+    return df
