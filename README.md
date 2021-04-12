@@ -106,7 +106,7 @@ plt.legend()
 plt.xticks(rotation=90)
 plt.show()
 ```
-<img src="images/top20_dapps.png" style="with:400px">
+<img src="images/top20_dapps.png" style="width:400px">
 
 
 
@@ -121,7 +121,7 @@ df = pd.concat(hist, axis=1)
 df.columns = exchanges
 df.plot(figsize=(12,6))
 ```
-<img src="images/main_dapps.png" style="with:400px">
+<img src="images/main_dapps.png" style="width:400px">
 
 
 
