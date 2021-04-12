@@ -45,10 +45,10 @@ dft.compare(days=20, var_A=0, var_B=150, rw_pool_A=0.01, rw_pool_B=0.05, rw_pool
 
 ```json
 {
- 'buy_hold': '75.00%',
- 'stake': '75.60%',
- 'farm': '71.96%',
- 'Mejor Estrategia': 'Stake'
+ "buy_hold": "75.00%",
+ "stake": "75.60%",
+ "farm": "71.96%",
+ "Mejor Estrategia": "Stake"
 }
 ```
 
@@ -66,21 +66,21 @@ metadata
 
 ```json
 {
- 'id': '1',
- 'name': 'Uniswap',
- 'address': '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
- 'symbol': 'UNI',
- 'url': 'https://info.uniswap.org/',
- 'description': 'A fully decentralized protocol for automated liquidity provision on Ethereum.\r\n',
- 'chain': 'Ethereum',
- 'logo': None,
- 'audits': '2',
- 'audit_note': None,
- 'gecko_id': 'uniswap',
- 'cmcId': '7083',
- 'category': 'Dexes',
- 'chains': ['Ethereum'],
- 'module': 'uniswap.js'
+ "id": "1",
+ "name": "Uniswap",
+ "address": "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984",
+ "symbol": "UNI",
+ "url": "https://info.uniswap.org/",
+ "description": "A fully decentralized protocol for automated liquidity provision on Ethereum.\r\n",
+ "chain": "Ethereum",
+ "logo": None,
+ "audits": "2",
+ "audit_note": None,
+ "gecko_id": "uniswap",
+ "cmcId": "7083",
+ "category": "Dexes",
+ "chains": ["Ethereum"],
+ "module": "uniswap.js"
 }
 ```
 
@@ -106,7 +106,7 @@ plt.legend()
 plt.xticks(rotation=90)
 plt.show()
 ```
-<img src="images/top20_dapps.png" with=600>
+<img src="images/top20_dapps.png" with=400>
 
 
 
@@ -121,7 +121,7 @@ df = pd.concat(hist, axis=1)
 df.columns = exchanges
 df.plot(figsize=(12,6))
 ```
-<img src="images/main_dapps.png" with=600>
+<img src="images/main_dapps.png" with=400>
 
 
 
