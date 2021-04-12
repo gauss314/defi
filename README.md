@@ -128,20 +128,21 @@ df.plot(figsize=(12,6))
 ## CoinGecko API
 
 Endpoints available, some examples:
-	* geckoPrice("bitcoin,ethereum", "usd,eur,brl")
+
+	* dft.geckoPrice("bitcoin,ethereum", "usd,eur,brl")
 		# coinGecko quotes
 
-	* geckoList(page=1, per_page=250)
+	* dft.geckoList(page=1, per_page=250)
 		# full coinGecko cyptocurrency list
 
-	* geckoMarkets("ethereum")
+	* dft.geckoMarkets("ethereum")
 		# top 100 liquidity markets, prices, and more, for eth or other coin
 
-	* geckoHistorical('cardano')
+	* dft.geckoHistorical('cardano')
 		# full history containing price, market cap and volume 
 
 
-full API wraper soon
+full API wrapper soon
 
 
 
