@@ -4,6 +4,7 @@
 
 [![Downloads](https://pepy.tech/badge/defi)](https://pepy.tech/project/defi)
 [![License](http://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/gauss314/defi/blob/main/LICENSE.txt)
+[![Downloads](https://img.shields.io/twitter/follow/JohnGalt_is_www?color=blue&style=flat-square)](https://twitter.com/JohnGalt_is_www)
 
 
 <br>
@@ -42,7 +43,7 @@
 
 
 ```sh
-pip install defi0
+pip install defi
 ```
 
 <br>
