@@ -476,8 +476,8 @@ def iloss_simulate(base_token, quote_token, value=100, base_pct_chg=0, quote_pct
     ax.set_zlabel('Impremante loss')
     ax.view_init(elev=25, azim=240) # start view angle
     
-    print (f"\nStart value USD {value:.0f}, {base} USD {px_base:.2f}, {quote} USD {px_quote:.2f}")    
-    print(f"\nResults assuming {base.upper()} {base_pct_chg}%, and {quote.upper()} {quote_pct_chg}%")
+    print (f"\nStart value USD {value:.0f}, {base_token} USD {px_base:.2f}, {quote_token} USD {px_quote:.2f}")    
+    print(f"\nResults assuming {base_token.upper()} {base_pct_chg}%, and {quote_token.upper()} {quote_pct_chg}%")
     print (f"End value estimate USD {value_f:.0f}, iloss: {iloss:.2%}")
     plt.show()
 

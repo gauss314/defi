@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(name="defi",
 	packages=find_packages() ,
-	version="1.0.11", 
+	version="1.0.12", 
 	descrription="Tools for use in DeFi", 
 	author="Juan Pablo Pisano",
 	author_email="jpp.programacion@gmail.com", 
