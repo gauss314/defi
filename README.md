@@ -1,8 +1,13 @@
 # Tools for use in DeFi
 
-[link](#get-main-exchanges-for-a-coin-or-token) Main exchanges for one token
+* General Tools
+	[Main exchanges for one token](#get-main-exchanges-for-a-coin-or-token)
 
+* CoinGecko API
+	** other
 
+* PancakeSwap API
+	** other
 
 
 ## Instalation
