@@ -1,4 +1,12 @@
-# Content
+<br>
+
+# DeFi open source tools
+
+[![Downloads](https://pepy.tech/badge/defi)](https://pepy.tech/project/defi)
+[![License](http://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/gauss314/defi/blob/main/LICENSE.txt)
+
+
+<br>
 
 ## Get Started
 * [Instalation](#instalation)
@@ -34,7 +42,7 @@
 
 
 ```sh
-pip install defi
+pip install defi0
 ```
 
 <br>
