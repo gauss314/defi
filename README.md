@@ -150,9 +150,11 @@ import defi.defi_tools as dft
 
 dft.geckoPrice("bitcoin,ethereum", "usd,eur,brl")
 ```
-{'ethereum': {'usd': 2149.85, 'eur': 1807.58, 'brl': 12208.77},
- 'bitcoin': {'usd': 60188, 'eur': 50606, 'brl': 341802}}
 
+```json
+{"ethereum": {"usd": 2149.85, "eur": 1807.58, "brl": 12208.77},
+ "bitcoin": {"usd": 60188, "eur": 50606, "brl": 341802}}
+```
 
 
 
@@ -164,7 +166,7 @@ df = dft.geckoMarkets("ethereum")
 print(df.info())
 # returns top 100 ethereum quotes by volume
 ```
-
+```text
 Index: 100 entries, IDCM to FTX.US
 Data columns (total 9 columns):
  #   Column       Non-Null Count  Dtype              
@@ -180,7 +182,7 @@ Data columns (total 9 columns):
  8   trust_score  100 non-null    object             
 dtypes: datetime64[ns, UTC](1), float64(5), object(3)
 memory usage: 7.8+ KB
-
+```
 
 
 #### Get historical prices for a coin
@@ -190,7 +192,7 @@ import defi.defi_tools as dft
 df = dft.geckoHistorical('cardano')
 print(df)
 ```
-
+<pre>
                         price   market_caps  total_volumes
 date                                                      
 2017-10-18 00:00:00  0.026845  6.960214e+08   2.351678e+06
@@ -206,7 +208,7 @@ date
 2021-04-17 03:47:55  1.433489  4.595961e+10   5.152747e+09
 
 [1278 rows x 3 columns]
-
+</pre>
 
 
 
@@ -219,6 +221,7 @@ import defi.defi_tools as dft
 df = dft.pcsTokens()
 print(df)
 ```
+```text
                                                          name     symbol       price  price_BNB                 updated
 0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82  PancakeSwap Token       Cake     24.0636     0.0450 2021-04-17 04:29:08.332
 0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c        Wrapped BNB       WBNB    534.2575     1.0000 2021-04-17 04:29:08.332
@@ -233,7 +236,7 @@ print(df)
 0x019bE1796178516e060072004F267B59a49A0801     Pepper Finance       PEPR      0.1819     0.0003 2021-04-17 04:29:08.332
 
 [854 rows x 5 columns]
-
+```
 
 
 ### Get pairs, liquidity, and more
@@ -243,24 +246,25 @@ import defi.defi_tools as dft
 pairs = dft.pcsPairs(as_df=False)
 print(pairs)
 ```
-{'updated_at': 1618645355351,
- 'data': {'0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82_0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c': 
- 	{'pair_address': '0xA527a61703D82139F8a06Bc30097cC9CAA2df5A6',
-	   'base_name': 'PancakeSwap Token',
-	   'base_symbol': 'Cake',
-	   'base_address': '0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82',
-	   'quote_name': 'Wrapped BNB',
-	   'quote_symbol': 'WBNB',
-	   'quote_address': '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
-	   'price': '0.04503969270521829587',
-	   'base_volume': '5473068.824002232134035221',
-	   'quote_volume': '239997.1228321299572591638',
-	   'liquidity': '1076144814.0632013827775993748053',
-	   'liquidity_BNB': '2007551.221740467021401314'
-	},
-	.....
-}
 
+```json
+{"updated_at": 1618645355351,
+ "data": {"0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82_0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c": 
+ 	{"pair_address": "0xA527a61703D82139F8a06Bc30097cC9CAA2df5A6",
+	   "base_name": "PancakeSwap Token",
+	   "base_symbol": "Cake",
+	   "base_address": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
+	   "quote_name": "Wrapped BNB",
+	   "quote_symbol": "WBNB",
+	   "quote_address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+	   "price": "0.04503969270521829587",
+	   "base_volume": "5473068.824002232134035221",
+	   "quote_volume": "239997.1228321299572591638",
+	   "liquidity": "1076144814.0632013827775993748053",
+	   "liquidity_BNB": "2007551.221740467021401314"
+	},
+}
+```
 
 
 ### Get token info
@@ -268,11 +272,13 @@ print(pairs)
 import defi.defi_tools as dft
 dft.pcsTokenInfo('cake')
 ```
-{'name': 'PancakeSwap Token',
- 'symbol': 'Cake',
- 'price': '24.03353223898417117634582253598019',
- 'price_BNB': '0.04503467915973850237292527741402623'
+```json
+{"name": "PancakeSwap Token",
+ "symbol": "Cake",
+ "price": "24.03353223898417117634582253598019",
+ "price_BNB": "0.04503467915973850237292527741402623"
 }
+```
 
 
 ### Get pair info
@@ -280,25 +286,28 @@ dft.pcsTokenInfo('cake')
 import defi.defi_tools as dft
 dft.pcsPairInfo('cake','bnb')
 ```
-{'pair_address': '0xA527a61703D82139F8a06Bc30097cC9CAA2df5A6',
- 'base_name': 'PancakeSwap Token',
- 'base_symbol': 'Cake',
- 'base_address': '0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82',
- 'quote_name': 'Wrapped BNB',
- 'quote_symbol': 'WBNB',
- 'quote_address': '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
- 'price': '0.04503969270521829587',
- 'base_volume': '5473068.824002232134035221',
- 'quote_volume': '239997.1228321299572591638',
- 'liquidity': '1076144814.0632013827775993748053',
- 'liquidity_BNB': '2007551.221740467021401314'
+
+```json
+{"pair_address": "0xA527a61703D82139F8a06Bc30097cC9CAA2df5A6",
+ "base_name": "PancakeSwap Token",
+ "base_symbol": "Cake",
+ "base_address": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
+ "quote_name": "Wrapped BNB",
+ "quote_symbol": "WBNB",
+ "quote_address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+ "price": "0.04503969270521829587",
+ "base_volume": "5473068.824002232134035221",
+ "quote_volume": "239997.1228321299572591638",
+ "liquidity": "1076144814.0632013827775993748053",
+ "liquidity_BNB": "2007551.221740467021401314"
 }
+```
 
 
 ### Simulate LP invest
 ```python
 import defi.defi_tools as dft
-dft.value_f, iloss = iloss_simulate('cake','bnb', value=1000, base_pct_chg=50, quote_pct_chg=-25)
+dft.value_f, iloss = dft.iloss_simulate('cake','bnb', value=1000, base_pct_chg=50, quote_pct_chg=-25)
 ```
 <img src="images/imp_loss_3d.png" width=600>
 
