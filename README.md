@@ -354,4 +354,4 @@ dft.value_f, iloss = dft.iloss_simulate('cake','bnb', value=1000, base_pct_chg=5
 
 ### About
 
-- twitter user @JohnGalt_is_www
+- [twitter user @JohnGalt_is_www](https://twitter.com/JohnGalt_is_www)
