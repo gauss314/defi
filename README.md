@@ -1,6 +1,6 @@
 # Tools for use in DeFi
 
-[get tokens prices in real time][linked]
+[#get-main-exchanges-for-a-coin-or-token] Main exchanges for one token
 
 
 
