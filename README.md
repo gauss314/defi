@@ -4,8 +4,9 @@
 
 [![Downloads](https://pepy.tech/badge/defi)](https://pepy.tech/project/defi)
 [![License](http://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/gauss314/defi/blob/main/LICENSE.txt)
-[![Downloads](https://img.shields.io/twitter/follow/JohnGalt_is_www?color=blue&style=flat-square)](https://twitter.com/JohnGalt_is_www)
-
+[![Twitter](https://img.shields.io/twitter/follow/JohnGalt_is_www?color=blue&style=flat-square)](https://twitter.com/JohnGalt_is_www)
+[![Update](https://img.shields.io/github/last-commit/gauss314/defi)]
+[![Update](https://img.shields.io/pypi/pyversions/defi?color=green&label=python)](https://pypi.org/project/defi/)
 
 <br>
 

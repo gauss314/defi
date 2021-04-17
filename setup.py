@@ -1,11 +1,15 @@
 from setuptools import setup, find_packages
+from os import path
 
+this_directory = path.abspath(path.dirname(__file__))
+with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
+    long_description = f.read()
 
 setup(name="defi",
 	packages=find_packages() ,
-	version="1.0.13", 
+	version="1.0.14", 
 	descrription="Tools for use in DeFi", 
-	long_description = "file: README.md",
+	long_description = long_description,
 	long_description_content_type = "text/markdown",
 	author="Juan Pablo Pisano",
 	author_email="jpp.programacion@gmail.com", 
