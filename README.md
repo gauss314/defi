@@ -1,16 +1,16 @@
 # Tools for use in DeFi
 
-* General Tools
-	[Main exchanges for one token](#get-main-exchanges-for-a-coin-or-token)
+## General Tools
+* [Main exchanges for one token](#get-main-exchanges-for-a-coin-or-token)
 
-* CoinGecko API
-	** other
+##CoinGecko API
+* other
 
-* PancakeSwap API
-	** other
+## PancakeSwap API
+* other
 
 
-## Instalation
+### Instalation
 
 
 ```sh
@@ -18,7 +18,7 @@ pip install defi
 ```
 
 
-## Impermanent Loss
+### Impermanent Loss
 
 ```python
 import defi.defi_tools as dft
@@ -41,7 +41,7 @@ dft.iloss(1.6, numerical=True)
 
 
 
-## Buy&Hold vs Stake & Farming strategy
+### Buy&Hold vs Stake & Farming strategy
 
 
 ```python
@@ -64,7 +64,7 @@ dft.compare(days=20, var_A=0, var_B=150, rw_pool_A=0.01, rw_pool_B=0.05, rw_pool
 
 
 
-## DeFi protocols
+### DeFi protocols
 
 
 ```python
@@ -96,7 +96,7 @@ metadata
 
 
 
-## Top 20 dapps TVL by chain
+### Top 20 dapps TVL by chain
 
 ```python
 import defi.defi_tools as dft
@@ -135,7 +135,7 @@ df.plot(figsize=(12,6))
 
 
 
-## CoinGecko API
+### CoinGecko API
 
 Endpoints available, some examples:
 
@@ -152,9 +152,8 @@ Endpoints available, some examples:
 		# full history containing price, market cap and volume 
 
 
-### Examples
 
-#### Get price for coins at diferent currencies
+### CoinGecko - Get price for coins at diferent currencies
 ```python
 import defi.defi_tools as dft
 
@@ -168,7 +167,7 @@ dft.geckoPrice("bitcoin,ethereum", "usd,eur,brl")
 
 
 
-#### Get main exchanges for a coin or token 
+### CoinGecko - Get main exchanges for a coin or token 
 ```python
 import defi.defi_tools as dft
 
@@ -195,7 +194,7 @@ memory usage: 7.8+ KB
 ```
 
 
-#### Get historical prices for a coin
+### CoinGecko - historical prices for a coin
 ```python
 import defi.defi_tools as dft
 
@@ -222,9 +221,7 @@ date
 
 
 
-## Pancake Swap
-
-### Get tokens prices in real time
+### PancakeSwap - Get tokens prices in real time
 ```python
 import defi.defi_tools as dft
 
@@ -249,7 +246,7 @@ print(df)
 ```
 
 
-### Get pairs, liquidity, and more
+### PancakeSwap - Get pairs, liquidity, and more
 ```python
 import defi.defi_tools as dft
 
@@ -277,7 +274,7 @@ print(pairs)
 ```
 
 
-### Get token info
+### PancakeSwap - Get token info
 ```python
 import defi.defi_tools as dft
 dft.pcsTokenInfo('cake')
@@ -291,7 +288,7 @@ dft.pcsTokenInfo('cake')
 ```
 
 
-### Get pair info
+### PancakeSwap - Get pair info
 ```python
 import defi.defi_tools as dft
 dft.pcsPairInfo('cake','bnb')
@@ -314,7 +311,7 @@ dft.pcsPairInfo('cake','bnb')
 ```
 
 
-### Simulate LP invest
+### PancakeSwap - Simulate LP invest
 ```python
 import defi.defi_tools as dft
 dft.value_f, iloss = dft.iloss_simulate('cake','bnb', value=1000, base_pct_chg=50, quote_pct_chg=-25)
@@ -325,6 +322,6 @@ dft.value_f, iloss = dft.iloss_simulate('cake','bnb', value=1000, base_pct_chg=5
 
 
 
-## About
+### About
 
 - twitter user @JohnGalt_is_www
