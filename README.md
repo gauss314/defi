@@ -1,14 +1,34 @@
-# Tools for use in DeFi
+# Content
+
+## instalation
+* [Instalation](#instalation)
 
 ## General Tools
-* [Main exchanges for one token](#get-main-exchanges-for-a-coin-or-token)
+* [Impermanent Loss, simple calculation](#impermanent-loss)
+* [Compare Buy & Hold with Staking and Farming](#buyhold-vs-stake--farming-strategy)
+* [Complete list for DeFi protocols TVL, volume and more](#defi-protocols)
+* [Example listing top20 DeFi dapps by TVL](#top-20-dapps-tvl-by-chain)
 
-##CoinGecko API
-* other
+## CoinGecko API
+* [API endpoints](#coingecko-api)
+* [Live prices](#coingecko---get-price-for-coins-at-diferent-currencies)
+* [All exchanges and prices for each coin](#coingecko---get-main-exchanges-for-a-coin-or-token)
+* [Historial prices por each coin](#coingecko---historical-prices-for-a-coin)
 
 ## PancakeSwap API
-* other
+* [All token prices real time](#pancakeswap---get-tokens-prices-in-real-time)
+* [All pairs liquidity, volume and more](#pancakeswap---get-pairs-liquidity-and-more)
+* [Get data in real time for one token](#pancakeswap---get-token-info)
+* [Get data in real time for one pair](#pancakeswap---get-pair-info)
+* [Simulate invest in LP considering impermanent loss, 3D graph](#pancakeswap---simulate-lp-invest)
 
+
+
+<br><br>
+
+# Documentation
+
+<br>
 
 ### Instalation
 
@@ -17,6 +37,7 @@
 pip install defi
 ```
 
+<br>
 
 ### Impermanent Loss
 
@@ -40,6 +61,7 @@ dft.iloss(1.6, numerical=True)
 > 0.027   # Same as 2.7%
 
 
+<br>
 
 ### Buy&Hold vs Stake & Farming strategy
 
@@ -62,7 +84,7 @@ dft.compare(days=20, var_A=0, var_B=150, rw_pool_A=0.01, rw_pool_B=0.05, rw_pool
 }
 ```
 
-
+<br>
 
 ### DeFi protocols
 
@@ -94,7 +116,7 @@ metadata
 }
 ```
 
-
+<br>
 
 ### Top 20 dapps TVL by chain
 
@@ -134,6 +156,7 @@ df.plot(figsize=(12,6))
 <img src="images/main_dapps.png" width=600>
 
 
+<br>
 
 ### CoinGecko API
 
@@ -165,7 +188,7 @@ dft.geckoPrice("bitcoin,ethereum", "usd,eur,brl")
  "bitcoin": {"usd": 60188, "eur": 50606, "brl": 341802}}
 ```
 
-
+<br>
 
 ### CoinGecko - Get main exchanges for a coin or token 
 ```python
@@ -193,6 +216,7 @@ dtypes: datetime64[ns, UTC](1), float64(5), object(3)
 memory usage: 7.8+ KB
 ```
 
+<br>
 
 ### CoinGecko - historical prices for a coin
 ```python
@@ -220,6 +244,7 @@ date
 </pre>
 
 
+<br>
 
 ### PancakeSwap - Get tokens prices in real time
 ```python
@@ -245,6 +270,7 @@ print(df)
 [854 rows x 5 columns]
 ```
 
+<br>
 
 ### PancakeSwap - Get pairs, liquidity, and more
 ```python
@@ -273,6 +299,7 @@ print(pairs)
 }
 ```
 
+<br>
 
 ### PancakeSwap - Get token info
 ```python
@@ -287,6 +314,7 @@ dft.pcsTokenInfo('cake')
 }
 ```
 
+<br>
 
 ### PancakeSwap - Get pair info
 ```python
@@ -310,6 +338,7 @@ dft.pcsPairInfo('cake','bnb')
 }
 ```
 
+<br>
 
 ### PancakeSwap - Simulate LP invest
 ```python
@@ -321,6 +350,7 @@ dft.value_f, iloss = dft.iloss_simulate('cake','bnb', value=1000, base_pct_chg=5
 
 
 
+<br>
 
 ### About
 
