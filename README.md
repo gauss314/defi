@@ -1,6 +1,6 @@
 # Content
 
-## instalation
+## Get Started
 * [Instalation](#instalation)
 
 ## General Tools
@@ -26,7 +26,7 @@
 
 <br><br>
 
-# Documentation
+## Get started
 
 <br>
 
