@@ -158,18 +158,19 @@ def geckoPrice(tokens, quote):
 
 
 
-def geckoList(page=1, per_page=250):
+def geckoList(page=1, per_page=250, ids=None):
     """Returns list of full detail conGecko currency list
     
     Args:
         page (int, optional): number of pages
         per_page (int, optional): number of records per page
+        ids (string, optional): The ids of the coin, comma separated crytocurrency symbols (base). refers to /coins/list
     
     Returns:
         DataFrame: list of full detail conGecko currency list
     """
     url = "https://api.coingecko.com/api/v3/coins/markets"
-    params = {"vs_currency":"usd", "order":"market_cap_desc", "per_page":per_page, "page":page}
+    params = {"vs_currency":"usd", "order":"market_cap_desc", "per_page":per_page, "page":page, "ids":ids}
     r = requests.get(url, params).json()
     df = pd.DataFrame(r)
     df.set_index('symbol', inplace=True)
