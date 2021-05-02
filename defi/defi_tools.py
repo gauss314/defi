@@ -205,18 +205,20 @@ def geckoMarkets(ticker):
 
 
 
-def geckoHistorical(ticker, vs_currency='usd'):
+def geckoHistorical(ticker, vs_currency='usd', days='max'):
     """Historical prices from coinGecko
     
     Args:
         ticker (string): gecko ID, ie "bitcoin"
         vs_currency (str, optional): ie "usd" (default)
+        days (str, optional): ie "20", "max" (default)
     
     Returns:
         DataFrame: Full history: date, price, market cap & volume
     """
+    
     url = f"https://api.coingecko.com/api/v3/coins/{ticker}/market_chart"
-    params = {"vs_currency":{vs_currency}, "days":"max"}
+    params = {"vs_currency":{vs_currency}, "days":days}
     r = requests.get(url, params).json()
     prices = pd.DataFrame(r['prices'])
     market_caps = pd.DataFrame(r['market_caps'])
