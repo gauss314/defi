@@ -18,6 +18,7 @@
 * [Compare Buy & Hold with Staking and Farming](#buyhold-vs-stake--farming-strategy)
 * [Complete list for DeFi protocols TVL, volume and more](#defi-protocols)
 * [Example listing top20 DeFi dapps by TVL](#top-20-dapps-tvl-by-chain)
+* [Example show historical TVL for one or more protocols ](#historical-tvl)
 
 ## CoinGecko API
 * [API endpoints](#coingecko-api)
@@ -156,6 +157,9 @@ plt.show()
 <img src="images/top20_dapps.png" width=600>
 
 
+<br>
+### Historical TVL
+
 
 ```python
 import defi.defi_tools as dft
@@ -199,7 +203,7 @@ Endpoints available, some examples:
 
 ### CoinGecko - ids list
 ```python
-import defi_tools as dft
+import defi.defi_tools as dft
 
 ids = dft.getGeckoIDs()
 ids[:10]
@@ -288,7 +292,7 @@ date
 
 ### CoinGecko - Farming Simulate
 ```python
-import defi_tools as dft
+import defi.defi_tools as dft
 
 pair = ['huobi-token','tether']
 apr = 45
@@ -308,7 +312,7 @@ Downloading tether
  'Farming + Rewards - IL': '153.02%'}
 
 </pre>
-<img src="images/simulate.png" width=600>
+<img src="images/simulate.png" width=800>
 
 
 <br>
