@@ -21,9 +21,11 @@
 
 ## CoinGecko API
 * [API endpoints](#coingecko-api)
+* [Get IDs list](#coingecko---ids-list)
 * [Live prices](#coingecko---get-price-for-coins-at-diferent-currencies)
 * [All exchanges and prices for each coin](#coingecko---get-main-exchanges-for-a-coin-or-token)
 * [Historial prices por each coin](#coingecko---historical-prices-for-a-coin)
+* [Simulate Farming Strategy](#coingecko---farming-simulate)
 
 ## PancakeSwap API
 * [All token prices real time](#pancakeswap---get-tokens-prices-in-real-time)
@@ -136,14 +138,17 @@ import matplotlib.pyplot as plt
 
 df = dft.getProtocols()
 fig, ax = plt.subplots(figsize=(12,6))
-top_20 = df.sort_values('tvl', ascending=False).head(20)
 
-chains = top_20.groupby('chain').size().index.values.tolist()
+n = 50 # quantity to show
+top = df.sort_values('tvl', ascending=False).head(n)
+
+chains = top.groupby('chain').size().index.values.tolist()
 for chain in chains:
-    filtro = top_20.loc[top_20.chain==chain]
+    filtro = top.loc[top.chain==chain]
     ax.bar(filtro.index, filtro.tvl, label=chain)
 
-ax.set_title('Top 20 dApp TVL, groupBy dApp main Chain', fontsize=14)
+ax.set_title(f'Top {n} dApp TVL, groupBy dApp main Chain', fontsize=14)
+ax.grid(alpha=0.5)
 plt.legend()
 plt.xticks(rotation=90)
 plt.show()
@@ -156,11 +161,12 @@ plt.show()
 import defi.defi_tools as dft
 import pandas as pd
 
-exchanges = ['pancakeswap', 'venus', 'uniswap','Compound', 'AAVE']
+exchanges = ['pancakeswap', 'curve', 'makerdao', 'uniswap','Compound', 'AAVE','sushiswap','anchor']
 
 hist = [dft.getProtocol(exchange)[1] for exchange in exchanges]
 df = pd.concat(hist, axis=1)
 df.columns = exchanges
+
 df.plot(figsize=(12,6))
 ```
 <img src="images/main_dapps.png" width=600>
@@ -171,6 +177,9 @@ df.plot(figsize=(12,6))
 ### CoinGecko API
 
 Endpoints available, some examples:
+
+    * dft.getGeckoIDs()
+        # coinGecko first 5000 ids
 
 	* dft.geckoPrice("bitcoin,ethereum", "usd,eur,brl")
 		# coinGecko quotes
@@ -184,6 +193,29 @@ Endpoints available, some examples:
 	* dft.geckoHistorical('cardano')
 		# full history containing price, market cap and volume 
 
+    * dft.farmSimulate(['huobi-token','tether'], apr=45)
+        # Simulate farming strategy with apr=45% 
+
+
+### CoinGecko - ids list
+```python
+import defi_tools as dft
+
+ids = dft.getGeckoIDs()
+ids[:10]
+```
+<pre>
+['bitcoin',
+ 'ethereum',
+ 'binancecoin',
+ 'tether',
+ 'solana',
+ 'cardano',
+ 'ripple',
+ 'polkadot',
+ 'shiba-inu',
+ 'dogecoin']
+</pre>
 
 
 ### CoinGecko - Get price for coins at diferent currencies
@@ -252,6 +284,31 @@ date
 
 [1278 rows x 3 columns]
 </pre>
+
+
+### CoinGecko - Farming Simulate
+```python
+import defi_tools as dft
+
+pair = ['huobi-token','tether']
+apr = 45
+
+dft.farmSimulate(pair, apr, start='2021-01-01')
+```
+<pre>
+Downloading huobi-token
+Downloading tether
+{'Token 1': 'huobi-token',
+ 'Token 2': 'tether',
+ 'start': '2021-01-01',
+ 'fixed APR': '45%',
+ 'Buy & Hold': '68.90%',
+ 'Impermanent Loss': '-8.66%',
+ 'Farming Rewards': '75.45%',
+ 'Farming + Rewards - IL': '153.02%'}
+
+</pre>
+<img src="images/simulate.png" width=600>
 
 
 <br>

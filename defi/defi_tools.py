@@ -6,6 +6,7 @@ import numpy as np
 import datetime, requests
 from scipy import interpolate
 import matplotlib.cm as cm
+from matplotlib.gridspec import GridSpec
 
 
 from pandas.plotting import register_matplotlib_converters
@@ -231,6 +232,114 @@ def geckoHistorical(ticker, vs_currency='usd', days='max'):
     return df
 
 
+def getGeckoIDs():
+    """IDs List from coinGecko
+    
+    Returns:
+        list: First 5000 coingecko IDs by marketCap rank
+    """    
+    ids_list = []
+
+    for i in range(20):
+        print(f'searching coins page: {i}   ', end='\r')
+        ids_list = ids_list + geckoList(page=i, per_page=250)['id'].tolist()
+    return ids_list
+
+
+
+
+def farmSimulate(pair, apr, start='2021-01-01'):
+    """Simulate farm result with historical prices & APR value
+    
+    Args:
+        pair (list): gecko IDs list ["bitcoin",'tether']
+        apr (float): ie 25 (for 25% Anual rewards)
+        start (str, optional): ISO Format YYYY-MM-DD ie "2021-01-01", "2021-01-01" (default)
+    
+    Returns:
+        Dict & Plot: Full farming strategy results
+    """
+
+    prices = pd.DataFrame()
+    for coin in pair:
+        print(f'Downloading {coin}')
+        try:
+            df = geckoHistorical(coin)
+            prices[coin] = df['price']
+        except:
+            print(f'Error geting {coin} prices')
+
+    if len(prices.columns)==2:
+        prices = prices.dropna().iloc[:]
+        start = datetime.datetime.strptime(start, '%Y-%m-%d')  
+        farm = prices.loc[prices.index>=start]
+        farm = farm.divide(farm.iloc[0])
+        farm['ratio'] = farm.iloc[:,1].divide(farm.iloc[:,0])
+
+        farm['iloss'] = 2 * (farm['ratio']**0.5 / (1 + farm['ratio'])) - 1
+        farm['rewards'] = pd.Series(2*apr/100/365, index=farm.index).cumsum()
+        farm['buy_hold'] = (farm.iloc[:,0] + farm.iloc[:,1])/2 
+        farm['farm'] =  farm.buy_hold - farm.iloss + farm.rewards 
+
+        cagrs = farm.iloc[-1]**(1/(365/len(farm)))-1
+        sigmas = farm.pct_change().std() * 365**0.5
+        sharpes = cagrs.divide(sigmas).round(2)
+        dd = farm/farm.cummax()-1
+
+        fig = plt.figure(figsize=(15,8))
+        gs = GridSpec(nrows=2,ncols=4, figure=fig, height_ratios=[2,1], hspace=0.45, wspace=0.35, top=.9)
+        ax_upleft = fig.add_subplot(gs[0,0:2])
+        ax_upright = fig.add_subplot(gs[0,2:])
+        cols = 4
+        ax_down = [fig.add_subplot(gs[1,i]) for i in range(cols)]
+        
+        ax_upleft.plot(farm.iloss.abs(), label='Impermanent Loss')
+        ax_upleft.plot(farm.rewards, label='Farming Rewards')
+        ax_upleft.legend()
+        ax_upleft.grid()
+        ax_upleft.set_title('Impermanent Loss vs Farming Rewards')
+        ax_upleft.tick_params(axis='x', rotation=45)
+        
+        ax_upright.plot(farm.iloc[:,:2])
+        ax_upright.plot(farm.buy_hold)
+        ax_upright.plot(farm.farm)
+        ax_upright.grid()
+        ax_upright.legend([pair[0],pair[1],'Buy&Hold','Farming Strategy'])
+        ax_upright.set_title(f'{pair[0]} vs {pair[1]} vs Buy & Hold vs Farming strategy payoff')
+        ax_upright.tick_params(axis='x', rotation=45)
+        
+        cagrs[[pair[0],pair[1],'buy_hold','farm']].plot(kind='bar', ax=ax_down[0])
+        sigmas[[pair[0],pair[1],'buy_hold','farm']].plot(kind='bar', ax=ax_down[1])
+        sharpes[[pair[0],pair[1],'buy_hold','farm']].plot(kind='bar', ax=ax_down[2])
+        dd[[pair[0],pair[1],'buy_hold','farm']].min().plot(kind='bar', ax=ax_down[3])
+
+        ax_down[0].set_title('CAGR', fontsize=12)
+        ax_down[1].set_title('Anualized Volatility', fontsize=12)
+        ax_down[2].set_title('Sharpe Ratio', fontsize=12)
+        ax_down[3].set_title('Max DrawDowns', fontsize=12)
+        [ax_down[i].grid(alpha=0.4) for i in range(cols)]
+
+        for i in range(cols):
+            ax_down[i].spines['top'].set_visible(False)
+            ax_down[i].spines['right'].set_visible(False)
+
+        
+        b_h = (farm.iloc[-1].iloc[0] + farm.iloc[-1].iloc[1])/2 - 1
+        iloss = farm.iloc[-1].iloss
+        rewards = farm.iloc[-1].rewards
+        net_farming = b_h - iloss + rewards
+
+        
+        result = {'Token 1': pair[0], 'Token 2': pair[1], 'start':start.isoformat()[:10], 
+                  'fixed APR': f'{apr/100:.0%}', 'Buy & Hold': f'{b_h:.2%}', 
+                  'Impermanent Loss':f'{iloss:.2%}', 'Farming Rewards': f'{rewards:.2%}', 
+                  'Farming + Rewards - IL': f'{net_farming:.2%}' }
+
+    else:
+        result = 'Error geting historical prices, see geckoIDs() function to get CoinGecko IDs'
+    return result
+
+
 
 ######################################################################
 ##                                                                  ##
@@ -251,10 +360,17 @@ def toFloatPartial(df):
         
 def pcsSummary(as_df = True ):
 
-    url = "https://api.pancakeswap.info/api/summary"
+    url = "https://api.pancakeswap.info/api/v2/summary"
     r = requests.get(url).json()
+    data = r.get('data', None)
+    upd = r.get('updated_at')/1000
+    upd_dt = datetime.datetime.fromtimestamp(upd)
+
     if as_df:
-        return pd.DataFrame.from_dict(r, orient='index')
+        df = pd.DataFrame.from_dict(data, orient='index')
+        df = toFloatPartial(df) 
+        df['updated'] = upd_dt
+        return df
     else:
         return r
 
@@ -270,7 +386,7 @@ def pcsTokens(as_df = True):
     """
     # ultimo precio y volumen de base/quote de todos los pares
 
-    url = "https://api.pancakeswap.info/api/tokens"
+    url = "https://api.pancakeswap.info/api/v2/tokens"
     r = requests.get(url).json()
     data = r.get('data', None)
     upd = r.get('updated_at')/1000
@@ -297,7 +413,7 @@ def pcsPairs(as_df = True):
        'quote_volume', 'liquidity', 'liquidity_BNB', 'updated'
     """
 
-    url = "https://api.pancakeswap.info/api/pairs"
+    url = "https://api.pancakeswap.info/api/v2/pairs"
     r = requests.get(url).json()
     data = r.get('data', None)
     upd = r.get('updated_at')/1000
@@ -327,7 +443,7 @@ def pcsTokenInfo(search):
          }
     """
     search = 'WBNB' if search.upper() == 'BNB' else search   
-    url = "https://api.pancakeswap.info/api/tokens"
+    url = "https://api.pancakeswap.info/api/v2/tokens"
     r = requests.get(url).json()
     data = r.get('data', None)
     res = f"Not found: {search}"
