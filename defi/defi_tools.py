@@ -276,10 +276,12 @@ def farmSimulate(pair, apr, start='2021-01-01'):
         farm = farm.divide(farm.iloc[0])
         farm['ratio'] = farm.iloc[:,1].divide(farm.iloc[:,0])
 
+
         farm['iloss'] = 2 * (farm['ratio']**0.5 / (1 + farm['ratio'])) - 1
-        farm['rewards'] = pd.Series(2*apr/100/365, index=farm.index).cumsum()
+        farm['rewards'] = pd.Series(1*apr/100/365, index=farm.index).cumsum()
         farm['buy_hold'] = (farm.iloc[:,0] + farm.iloc[:,1])/2 
-        farm['farm'] =  farm.buy_hold - farm.iloss + farm.rewards 
+        farm['farm'] =  farm.buy_hold *(1+farm.iloss) * (1+farm.rewards) 
+
 
         cagrs = farm.iloc[-1]**(1/(365/len(farm)))-1
         sigmas = farm.pct_change().std() * 365**0.5
@@ -327,7 +329,7 @@ def farmSimulate(pair, apr, start='2021-01-01'):
         b_h = (farm.iloc[-1].iloc[0] + farm.iloc[-1].iloc[1])/2 - 1
         iloss = farm.iloc[-1].iloss
         rewards = farm.iloc[-1].rewards
-        net_farming = b_h - iloss + rewards
+        net_farming = b_h  * (1+iloss) * (1+rewards)
 
         
         result = {'Token 1': pair[0], 'Token 2': pair[1], 'start':start.isoformat()[:10], 
