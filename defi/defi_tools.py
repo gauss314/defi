@@ -337,6 +337,8 @@ def farmSimulate(pair, apr, start='2021-01-01'):
                   'Impermanent Loss':f'{iloss:.2%}', 'Farming Rewards': f'{rewards:.2%}', 
                   'Farming + Rewards - IL': f'{net_farming:.2%}' }
 
+        plt.show()
+
     else:
         result = 'Error geting historical prices, see geckoIDs() function to get CoinGecko IDs'
     return result
@@ -482,7 +484,7 @@ def pcsPairInfo(base, quote):
                 }
                 * price is actually a ratio between base/quote tokens
     """
-    url = "https://api.pancakeswap.info/api/pairs"
+    url = "https://api.pancakeswap.info/api/v2/pairs"
     r = requests.get(url).json()
     data = r.get('data', None)
     res = f"Not found: {base}-{quote}"

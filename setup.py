@@ -7,7 +7,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 setup(name="defi",
 	packages=find_packages() ,
-	version="1.0.19", 
+	version="1.0.20", 
 	descrription="Tools for use in DeFi", 
 	long_description = long_description,
 	long_description_content_type = "text/markdown",
