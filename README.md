@@ -34,6 +34,7 @@
 * [Get data in real time for one token](#pancakeswap---get-token-info)
 * [Get data in real time for one pair](#pancakeswap---get-pair-info)
 * [Simulate invest in LP considering impermanent loss, 3D graph](#pancakeswap---simulate-lp-invest)
+* [DefiLPKit](https://defilpkit.com) - Free read-only LP calculator: fee APR, estimated net yield after impermanent loss and gas, and range scenarios for Uniswap v3, PancakeSwap v3, Aerodrome and Raydium pools.
 
 
 
